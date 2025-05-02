@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	errorhelper "github.com/gigatar/error-helper"
+	"github.com/gigatar/errorhelper"
 	"github.com/golang-jwt/jwt/v4"
 )
 
