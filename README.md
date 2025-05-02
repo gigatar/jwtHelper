@@ -1,6 +1,6 @@
 # jwtHelper
 
-`jwtHelper` is a lightweight Go package that simplifies JWT creation and validation in HTTP applications. It supports HMAC-based signing (HS512), role-based access control, and integrates with custom error encoding via [`errorhelper`](https://github.com/gigatar/error-helper).
+`jwtHelper` is a lightweight Go package that simplifies JWT creation and validation in HTTP applications. It supports HMAC-based signing (HS512), role-based access control, and integrates with custom error encoding via [`errorhelper`](https://github.com/gigatar/errorhelper).
 
 ## Features
 
