@@ -1,0 +1,4 @@
+github.com/gigatar/error-helper v0.0.0-20250502160411-029bed4bd00e h1:KWjenGgC0Oikwm45Wb63K2o9OwuOoy1mboRIcToniwE=
+github.com/gigatar/error-helper v0.0.0-20250502160411-029bed4bd00e/go.mod h1:DCaWFELlm/3x5PcnDb6L2WRA2+3JNon/XI6yPfQDO2E=
+github.com/golang-jwt/jwt/v4 v4.5.2 h1:YtQM7lnr8iZ+j5q71MGKkNw9Mn7AjHM68uc9g5fXeUI=
+github.com/golang-jwt/jwt/v4 v4.5.2/go.mod h1:m21LjoU+eqJr34lmDMbreY2eSTRJ1cv77w39/MY0Ch0=
