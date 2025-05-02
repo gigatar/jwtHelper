@@ -1,4 +1,4 @@
-module github.com/gigatar/jwt-helper
+module github.com/gigatar/jwtHelper
 
 go 1.24.2
 
