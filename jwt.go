@@ -1,6 +1,7 @@
 package jwtHelper
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
@@ -16,13 +17,14 @@ import (
 )
 
 type claim struct {
-	Email string   `json:"email"`
-	ID    string   `json:"id"`
-	Roles []string `json:"roles"`
+	Email      string   `json:"email"`
+	ID         string   `json:"id"`
+	Roles      []string `json:"roles"`
+	Attributes any      `json:"attributes,omitempty"`
 	jwt.RegisteredClaims
 }
 
-func CreateJWT(email, id, issuer string, roles []string) (tokenString string, err error) {
+func CreateJWT(email, id, issuer string, roles []string, attributes any) (tokenString string, err error) {
 
 	password := os.Getenv("JWT_PASSWORD")
 	ttl, err := strconv.Atoi(os.Getenv("JWT_TTL"))
@@ -47,6 +49,7 @@ func CreateJWT(email, id, issuer string, roles []string) (tokenString string, er
 			Issuer:    issuer,
 			NotBefore: jwt.NewNumericDate(time.Now()),
 		},
+		Attributes: attributes,
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS512, claims)
@@ -103,6 +106,7 @@ func ValidateJWT(requiredClaims []string, errorEncoder errorhelper.Encoder) func
 					r.Header.Add("email", claims.Email)
 					r.Header.Add("user-id", claims.ID)
 					r.Header.Add("roles", strings.Join(claims.Roles, ":"))
+					r.Header.Add("attributes", encodeAttributes(claims.Attributes))
 					next.ServeHTTP(w, r)
 				} else {
 					errorEncoder.Encode(r.Context(), errorhelper.ErrUnauthorized, w)
@@ -111,6 +115,14 @@ func ValidateJWT(requiredClaims []string, errorEncoder errorhelper.Encoder) func
 			}
 		})
 	}
+}
+
+func encodeAttributes(attributes any) string {
+	json, err := json.Marshal(attributes)
+	if err != nil {
+		return ""
+	}
+	return string(json)
 }
 
 func hasRequiredClaims(userRoles []string, requiredClaims []string) bool {
